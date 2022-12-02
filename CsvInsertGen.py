@@ -3,6 +3,7 @@ import re
 import sys
 import csv
 from tabulate import tabulate
+import openpyxl
 
 class ColInfo:
     name = ""
@@ -22,6 +23,21 @@ else:
     tblname =  sys.argv[3]
 
 outfile = open(fileoutname, "w")
+
+wbin = openpyxl.load_workbook(fileinname)
+sheet = wbin.active
+cell = sheet.cell(row = 1, column = 1)
+
+numcols = sheet.max_column
+numrows = sheet.max_row
+
+for c in range(1,numcols+1):
+    print(sheet.cell(row=1, column=c).value)
+print ("numcols", numcols,"numrows", numrows)
+print(cell.value) 
+
+print ("exiting, not reaaly doing the rest for now...")
+exit()  # -- Not reaaly doing the rest until modified
 
 # -- Go through once to get stats
 print("gathering stats")
