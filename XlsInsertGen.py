@@ -65,9 +65,10 @@ for rownum in range(2, numrows+1):
     i = -1
     for colnum in range(1, numcols + 1):
         cell = sheet.cell(row=rownum, column=colnum)
+        cellvalue = cell.value
         colinfo = cols[colnum - 1]
 
-        if (len(cell.value) > colinfo.maxlen):
+        if (len(cellvalue) > colinfo.maxlen):
             colinfo.maxlen = len(cell.value)
 
 outfile.write("-- == CsvInsertGen.py == -- \n")
