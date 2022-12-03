@@ -1,5 +1,5 @@
 -- == CsvInsertGen.py == -- 
--- Created       = 2022-12-02 15:47:02.444549
+-- Created       = 2022-12-02 15:52:20.331006
 -- fileinname    = ./TestFiles/TestIn.xlsx
 -- fileoutname   = ./TestFiles/TestIn.sql
 -- tblname       = TestTable
