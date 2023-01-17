@@ -9,6 +9,9 @@ class ColInfo:
     name = ""
     maxlen = 0
 
+def cleanvalue(vin):
+    return str(vin).replace("\n", "~").replace("\r", "~")
+
 multiplierforsize = 1.1   
 charstoremove = "ï»¿" 
 
@@ -41,7 +44,7 @@ print(cell.value)
 print("Gathering column info")
 cols = []
 for c in range(1, numcols+1):
-    colname = sheet.cell(row=1, column=c).value
+    colname = sheet.cell(row=1, column=c).value.strip().replace(" ", "_")
     print("Column", colname)
     colname = re.sub("[" + charstoremove + "]", "", colname, 0, re.IGNORECASE)
     newcol = ColInfo()
@@ -64,11 +67,11 @@ for rownum in range(2, numrows+1):
     i = -1
     for colnum in range(1, numcols + 1):
         cell = sheet.cell(row=rownum, column=colnum)
-        cellvalue = cell.value
+        cellvalue = cleanvalue(cell.value)
         colinfo = cols[colnum - 1]
 
         if (len(cellvalue) > colinfo.maxlen):
-            colinfo.maxlen = len(cell.value)
+            colinfo.maxlen = len(cellvalue)
 
 outfile.write("-- == CsvInsertGen.py == -- \n")
 outfile.write("-- Created       = {datetime}\n".format(datetime=datetime.datetime.now()))
@@ -116,15 +119,17 @@ print("Processing file")
 for rownum in range(2, numrows+1):
 
     ### DANGER! Use this code only when selecting/running for individual providers.
-    # selectedproviders = ['2377']
-    # if (row[0] not in selectedproviders):
+    # selectedproviders = [16784]
+    # # if (row[0] not in selectedproviders):
+    # if (sheet.cell(row=rownum, column=1).value not in selectedproviders):
     #     continue
 
     colvaluesquotedlist = []
     for colnum in range(1, numcols + 1):
         cell = sheet.cell(row=rownum, column=colnum)
+        cellvalue = cleanvalue(cell.value)
         colinfo = cols[colnum - 1]
-        colvaluequoted = "\'" + (cell.value).replace("\'","\'\'") + "\'"
+        colvaluequoted = "\'" + (cellvalue).replace("\'","\'\'") + "\'"
         colvaluesquotedlist.append(colvaluequoted)
 
     cntinsert = cntinsert + 1
@@ -136,7 +141,7 @@ for rownum in range(2, numrows+1):
     if ((rownum % 1000) == 0):
         outfile.write("GO\n")    
         outfile.write("\n")    
-        outfile.write("print 'Finished #{rownum}'\n".format(cnt=rownum))    
+        outfile.write("print 'Finished #{rownum}'\n".format(rownum=rownum))    
         outfile.write("\n")    
 
 outfile.write("SELECT Cnt = COUNT(*) FROM {tblname}\n".format(tblname=tblname))
@@ -156,5 +161,5 @@ print()
 print(tabulate(coltab, headers=["name","maxlen"]))
 print()
 
-print ("Exiting, not really doing the rest for now...")
-exit()  # -- Not really doing the rest until modified
+# print ("Exiting, not really doing the rest for now...")
+# exit()  # -- Not really doing the rest until modified

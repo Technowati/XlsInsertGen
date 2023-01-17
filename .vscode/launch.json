@@ -9,10 +9,21 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "./TestFiles/TestIn.xlsx", 
-                "./TestFiles/TestIn.sql",
-                "TestTable"
-            ]
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom Instructor List 01172023_New_Query.xlsx", 
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VpkLoad_00_UploadFromCsv.sql",
+                "T_VpkLoadTableRaw"
+                ],
+            "argsDelaware": [
+                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\DelawareRedux\\Load\\Early_Learning_Report_638055002378545469_Al.xlsx", 
+                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\DelawareRedux\\Load\\01_D2DataInsert.SQL",
+                "T_D2DataFileRaw"
+            ],            
+            "argsVpk": [
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom Instructor List 12132022.xlsx", 
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VpkLoad_00_UploadFromCsv.sql",
+                "T_VpkLoadTableRaw"
+            ],            
+
         }
     ]
 }
