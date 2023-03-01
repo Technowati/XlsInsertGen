@@ -2,6 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         
+        
         {
             "name": "Python: Current File",
             "type": "python",
@@ -9,19 +10,24 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom Instructor List 01172023_New_Query.xlsx", 
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom - Instructor List 02702023.xlsx",
                 "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VpkLoad_00_UploadFromCsv.sql",
                 "T_VpkLoadTableRaw"
                 ],
-            "argsDelaware": [
-                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\DelawareRedux\\Load\\Early_Learning_Report_638055002378545469_Al.xlsx", 
-                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\DelawareRedux\\Load\\01_D2DataInsert.SQL",
-                "T_D2DataFileRaw"
+            "argsDeeds": [
+                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\1891 Delaware DEEDS Data Upload\\Load Scripts\\WELS Certificate and STARS Career Lattice data 02232023.xlsx",
+                "C:\\Users\\asantaballa\\Nextcloud\\Al\\Projects\\1891 Delaware DEEDS Data Upload\\Load Scripts\\110_DEEDSData_UploadFromFile.sql",
+                "T_DEEDSDataFileRaw"
             ],            
             "argsVpk": [
-                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom Instructor List 12132022.xlsx", 
+                "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VPK Classroom Instructor List 12132022.xlsx",
                 "C:\\Users\\asantaballa\\Nextcloud\\vpk\\ZAL_VpkFileLoad\\VpkLoad_00_UploadFromCsv.sql",
                 "T_VpkLoadTableRaw"
+            ],            
+            "argsMissDHS": [
+                "C:\\Users\\asantaballa\\Nextcloud\\Al_FrankenFolder\\Projects\\Mississippi Data Load\\MissDHSLoad\\LARS_Data_12212022 (7).xlsx",
+                "C:\\Users\\asantaballa\\Nextcloud\\Al_FrankenFolder\\Projects\\Mississippi Data Load\\MissDHSLoad\\110_MissDHSLoad_UploadFromFile.sql",
+                "T_MissDHSLoadRaw"
             ],            
 
         }

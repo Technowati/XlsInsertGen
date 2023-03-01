@@ -118,9 +118,8 @@ print("Processing file")
 
 for rownum in range(2, numrows+1):
 
-    ### DANGER! Use this code only when selecting/running for individual providers.
-    # selectedproviders = [16784]
-    # # if (row[0] not in selectedproviders):
+    # ### DANGER! Use this code only when selecting/running for individual providers.
+    # selectedproviders = [1017]
     # if (sheet.cell(row=rownum, column=1).value not in selectedproviders):
     #     continue
 
@@ -129,7 +128,7 @@ for rownum in range(2, numrows+1):
         cell = sheet.cell(row=rownum, column=colnum)
         cellvalue = cleanvalue(cell.value)
         colinfo = cols[colnum - 1]
-        colvaluequoted = "\'" + (cellvalue).replace("\'","\'\'") + "\'"
+        colvaluequoted = "Null" if cellvalue == "None" else "\'" + (cellvalue).replace("\'","\'\'") + "\'"
         colvaluesquotedlist.append(colvaluequoted)
 
     cntinsert = cntinsert + 1
