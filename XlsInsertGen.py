@@ -119,7 +119,7 @@ print("Processing file")
 for rownum in range(2, numrows+1):
 
     # ### DANGER! Use this code only when selecting/running for individual providers.
-    # selectedproviders = [1017]
+    # selectedproviders = [17924, 17926, 19427, 20154, 7565]
     # if (sheet.cell(row=rownum, column=1).value not in selectedproviders):
     #     continue
 
@@ -134,6 +134,7 @@ for rownum in range(2, numrows+1):
     cntinsert = cntinsert + 1
     outfile.write("INSERT {tblname} ({sqlcolnames})\n".format(tblname=tblname, sqlcolnames=sqlcolnames))
     colvaluesquoted = ", ".join(colvaluesquotedlist)
+    colvaluesquoted = colvaluesquoted.replace("\u2002", " ")  # Special 
     outfile.write("VALUES ({colvaluesquoted})\n".format(colvaluesquoted=colvaluesquoted))
     outfile.write("\n")    
 
