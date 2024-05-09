@@ -104,6 +104,8 @@ outfile.write("  _ID INT NOT NULL IDENTITY (1,1)\n")
 for colinfo in cols:
     # coltab.append([colinfo.name, colinfo.maxlen])
     collentouse = int(max([50, colinfo.maxlen * multiplierforsize]))
+    if (collentouse > 4000):
+        collentouse = 'MAX'
 
     outfile.write(", {colname} NVARCHAR({collentouse}) NULL".format(colname=colinfo.sqlname, collentouse=collentouse))
     outfile.write("\n".format(colname=colinfo.name))
@@ -128,15 +130,16 @@ for rownum in range(2, numrows+1):
         cell = sheet.cell(row=rownum, column=colnum)
         cellvalue = cleanvalue(cell.value)
         colinfo = cols[colnum - 1]
-        colvaluequoted = "Null" if cellvalue == "None" else "\'" + (cellvalue).replace("\'","\'\'") + "\'"
+        # cellvalueclean = bytes(cellvalue, 'utf-8').encode("unicode_escape")
+        cellvalueclean = re.sub(r'[^\x20-\x7E]', ' ', cellvalue)
+
+        colvaluequoted = "Null" if cellvalue == "None" else "\'" + (cellvalueclean).replace("\'","\'\'") + "\'"
         colvaluesquotedlist.append(colvaluequoted)
 
     cntinsert = cntinsert + 1
     outfile.write("INSERT {tblname} ({sqlcolnames})\n".format(tblname=tblname, sqlcolnames=sqlcolnames))
     colvaluesquoted = ", ".join(colvaluesquotedlist)
-    colvaluesquoted = colvaluesquoted.replace("\u2002", " ")  # Special 
-    colvaluesquoted = colvaluesquoted.replace("\u200e", " ")  # Special 
-    colvaluesquoted = colvaluesquoted.replace("\u0301", " ")  # Special 
+    
     outfile.write("VALUES ({colvaluesquoted})\n".format(colvaluesquoted=colvaluesquoted))
     outfile.write("\n")    
 
