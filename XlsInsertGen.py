@@ -73,7 +73,7 @@ for rownum in range(2, numrows+1):
         if (len(cellvalue) > colinfo.maxlen):
             colinfo.maxlen = len(cellvalue)
 
-outfile.write("-- == CsvInsertGen.py == -- \n")
+outfile.write("-- == XlsInsertGen.py == -- \n")
 outfile.write("-- Created       = {datetime}\n".format(datetime=datetime.datetime.now()))
 outfile.write("-- fileinname    = {fileinname}\n".format(fileinname=fileinname))
 outfile.write("-- fileoutname   = {fileoutname}\n".format(fileoutname=fileoutname))
@@ -135,6 +135,8 @@ for rownum in range(2, numrows+1):
     outfile.write("INSERT {tblname} ({sqlcolnames})\n".format(tblname=tblname, sqlcolnames=sqlcolnames))
     colvaluesquoted = ", ".join(colvaluesquotedlist)
     colvaluesquoted = colvaluesquoted.replace("\u2002", " ")  # Special 
+    colvaluesquoted = colvaluesquoted.replace("\u200e", " ")  # Special 
+    colvaluesquoted = colvaluesquoted.replace("\u0301", " ")  # Special 
     outfile.write("VALUES ({colvaluesquoted})\n".format(colvaluesquoted=colvaluesquoted))
     outfile.write("\n")    
 
