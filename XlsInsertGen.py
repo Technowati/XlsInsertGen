@@ -5,6 +5,15 @@ import sys
 from tabulate import tabulate
 import openpyxl
 
+# -- Speaicl Options
+
+OptNoColHeaders = False #--True
+
+# -- 
+
+if (OptNoColHeaders):
+    print("Warning: OptNoColHeaders is ON!")
+
 class ColInfo:
     name = ""
     maxlen = 0
@@ -39,14 +48,24 @@ for colnum in range(1,numcols+1):
 print ("numcols", numcols,"numrows", numrows)
 print(cell.value) 
 
-
 # -- Get column info
 print("Gathering column info")
 cols = []
 for c in range(1, numcols+1):
-    colname = sheet.cell(row=1, column=c).value.strip().replace(" ", "_")
-    print("Column", colname)
+    # colname = sheet.cell(row=1, column=c).value.strip().replace(" ", "_")
+    valraw = sheet.cell(row=1, column=c).value
+    if (valraw == None):
+        valraw = ''
+    colname = valraw.strip().replace(" ", "_")
     colname = re.sub("[" + charstoremove + "]", "", colname, 0, re.IGNORECASE)
+    if (len(colname) > 120):
+        colname = '...' + colname[-120:]    # -- I know, ugly, but often the trailing part is the unique one
+    # colname = str(c) + ":" + colname     
+
+    if (OptNoColHeaders):
+        colname = "Col" + str(c)
+
+    print("Column", colname)
     newcol = ColInfo()
     newcol.name = colname
     newcol.sqlname = "[" + newcol.name + "]"
@@ -59,10 +78,14 @@ print("sqlcolnames", sqlcolnames)
 # -- Go through once to get stats
 print("Gathering file stats")
 
-rownun = 2  # -- Skip headings
+startingrownun = 2  # -- Skip headings
+
+if (OptNoColHeaders):
+    startingrownun = 1  # -- Don't skip headings
+
 cntinsert = 0
 
-for rownum in range(2, numrows+1):
+for rownum in range(startingrownun, numrows+1):
     colvaluesquotedlist = []
     i = -1
     for colnum in range(1, numcols + 1):
@@ -118,7 +141,7 @@ outfile.write("\n")
 
 print("Processing file")
 
-for rownum in range(2, numrows+1):
+for rownum in range(startingrownun, numrows+1):
 
     # ### DANGER! Use this code only when selecting/running for individual providers.
     # selectedproviders = [17924, 17926, 19427, 20154, 7565]
